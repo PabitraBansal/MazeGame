@@ -6,9 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Picture;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.Nullable;
@@ -49,12 +46,12 @@ public class GameView extends View
         random = new Random();
 
         playerPaint = new Paint();
-        Drawable d = getResources().getDrawable(R.drawable.player, null);
 
         playerPaint.setColor(Color.RED);
 
         exitPaint  =new Paint();
         exitPaint.setColor(Color.BLUE);
+
 
         createMaze();
     }
@@ -145,7 +142,8 @@ public class GameView extends View
     @Override
     protected void onDraw(Canvas canvas)
     {
-        canvas.drawColor(Color.GREEN);
+        View someView = findViewById(R.id.view2);
+        someView.setBackgroundResource(R.drawable.grass);
 
         int width = getWidth();
         int height = getHeight();
@@ -180,16 +178,15 @@ public class GameView extends View
 
         float margin = cellsize/15;
 
-        canvas.drawRect(exit.col*cellsize+margin,exit.row*cellsize+margin,(exit.col+1)*cellsize-margin,(exit.row+1)*cellsize-margin,exitPaint);
-        Drawable d = getResources().getDrawable(R.drawable.player, null);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.player);
-        Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, (int)cellsize, (int)cellsize, false);
+        Bitmap bitmap_player = BitmapFactory.decodeResource(getResources(), R.drawable.hasina_blank);
+        Bitmap resizedBitmap_player = Bitmap.createScaledBitmap(bitmap_player, (int)(cellsize*1.5), (int)(cellsize*1.5), false);
+        Bitmap bitmap_exit = BitmapFactory.decodeResource(getResources(), R.drawable.house_blank);
+        Bitmap resizedBitmap_exit = Bitmap.createScaledBitmap(bitmap_exit, (int)(cellsize*1.5), (int)(cellsize*1.5), false);
 
 
-        //d.setBounds(1,1,1,1)
-        //canvas.drawBitmap(d,(player.col+1)*cellsize-margin,(player.row+1)*cellsize-margin, playerPaint);
-        canvas.drawBitmap(resizedBitmap,player.col*cellsize+margin,player.row*cellsize+margin,playerPaint);
-       // canvas.drawRect(player.col*cellsize+margin,player.row*cellsize+margin,(player.col+1)*cellsize-margin,(player.row+1)*cellsize-margin,canvas.drawBitmap((Bitmap)findViewById(R.drawable.player)););
+        canvas.drawBitmap(resizedBitmap_exit,exit.col*cellsize+margin,exit.row*cellsize+margin,exitPaint);
+        canvas.drawBitmap(resizedBitmap_player,player.col*cellsize+margin,player.row*cellsize+margin,playerPaint);
+
     }
 
     private void movePlayer(Direction direction)
