@@ -57,18 +57,32 @@ public class GameView extends View
     }
 
     public void removeWall(Cell current, Cell next){
-        if(current.col == next.col && current.row == next.row+1)
-        {
-            current.topWall = false;
-            next.bottomWall = false;
-        }
+//         if(current.col == next.col && current.row == next.row+1)
+//         {
+//             current.topWall = false;
+//             next.bottomWall = false;
+//         }
 
-        if(current.col == next.col && current.row == next.row-1)
-        {
-            current.bottomWall = false;
-            next.topWall = false;
-        }
+//         if(current.col == next.col && current.row == next.row-1)
+//         {
+//             current.bottomWall = false;
+//             next.topWall = false;
+//         }
 
+        if(current.col == next.col)
+        {
+            if(current.row == next.row+1)
+            {
+                current.topWall = false;
+                next.bottomWall = false;
+            }
+            else if(current.row == next.row-1)
+            {
+                current.bottomWall = false;
+                next.topWall = false;
+            }
+        }
+        
         if(current.col == next.col+1 && current.row == next.row)
         {
             current.leftWall = false;
@@ -80,7 +94,6 @@ public class GameView extends View
             current.rightWall = false;
             next.leftWall = false;
         }
-
     }
 
     private Cell getNeighbour(Cell cell){
