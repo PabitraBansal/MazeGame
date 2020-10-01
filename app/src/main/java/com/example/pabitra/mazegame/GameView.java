@@ -209,6 +209,10 @@ public class GameView extends View
                 if(!player.rightWall)
                     player = cells[player.col+1][player.row];
                 break;
+            default:
+                if(!player.rightWall)
+                    player = cells[player.col+1][player.row];
+                break;
         }
         checkExit();
         invalidate();
